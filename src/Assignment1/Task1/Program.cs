@@ -24,5 +24,5 @@ for (int i = 0; i < size; i++)
     secondDiagonalSum += array[i, size - 1 - i];
 }
 
-Console.WriteLine($" 1st Diagonal Sum: {firstDiagonalSum}");
-Console.WriteLine($" 2nd Diagonal Sum: {secondDiagonalSum}");
+Console.WriteLine($"1st Diagonal Sum: {firstDiagonalSum}");
+Console.WriteLine($"2nd Diagonal Sum: {secondDiagonalSum}");
