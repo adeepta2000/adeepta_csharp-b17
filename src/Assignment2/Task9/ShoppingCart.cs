@@ -18,10 +18,14 @@ namespace Task9
 
         public double CalculateTotal()
         {
-            double total = 0;
-            for(int i = 0; i < Items.Length; i++)
+            var total = 0.0;
+
+            foreach (var item in Items)
             {
-                total += Items[i].Price * Items[i].Quantity;
+                if(item != null)
+                {
+                    total += item.Price * item.Quantity;
+                }
             }
 
             return total;
