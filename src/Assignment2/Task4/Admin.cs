@@ -13,10 +13,7 @@ namespace Task4
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-        }
-        public override void GenerateId(string keyword)
-        {
-            Id = keyword + Guid.NewGuid().ToString();
+
         }
     }
 }

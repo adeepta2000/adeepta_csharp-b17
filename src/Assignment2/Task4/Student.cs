@@ -14,9 +14,5 @@ namespace Task4
             LastName = lastName;
             Email = email;
         }
-        public override void GenerateId(string keyword)
-        {
-            Id = keyword + Guid.NewGuid().ToString();
-        }
     }
 }
