@@ -10,7 +10,7 @@ namespace Task8
     {
         public void ChangeExpirationDate(DateTime date)
         {
-            throw new NotImplementedException();
+            MembershipExpirationDate = date;
         }
     }
 }

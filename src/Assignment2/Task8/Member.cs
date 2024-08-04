@@ -10,7 +10,7 @@ namespace Task8
     {
         private string membershipId;
         public string Name { get; set; }
-        public DateTime MembershipExpirationDate { get; set; }
+        protected DateTime MembershipExpirationDate { get; set; }
 
         public Member()
         {
