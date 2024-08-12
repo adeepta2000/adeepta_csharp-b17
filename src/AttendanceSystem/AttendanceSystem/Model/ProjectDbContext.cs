@@ -14,7 +14,11 @@ namespace AttendanceSystem.Model
 
         public ProjectDbContext()
         {
-            _connectionString = "Server=SPIDEY-L;Database=CSharpB17;User Id=sa;Password=12345;Trust Server Certificate=True";
+            //MyConnectionString
+            //_connectionString = "Server=SPIDEY-L;Database=CSharpB17;User Id=sa;Password=12345;Trust Server Certificate=True";
+
+            //ProjectConnectionString
+            _connectionString ="Data Source=.\\SQLEXPRESS;Initial Catalog=CSharpB16;User ID=csharpb17; Password = 123456; TrustServerCertificate = True";
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
