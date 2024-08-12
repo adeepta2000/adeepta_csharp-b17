@@ -2,7 +2,9 @@
 using AttendanceSystem.Model;
 using AttendanceSystem.Model.DBEntity;
 using AttendanceSystem.Services;
+using System.Text;
 
+Console.OutputEncoding = Encoding.UTF8;
 
 ProjectDbContext projectDbContext = new ProjectDbContext();
 
@@ -21,7 +23,8 @@ while (true)
     }
     else if (role == "Teacher")
     {
-        Console.WriteLine("This is teacher page.");
+        TeacherService teacherService = new TeacherService(projectDbContext);
+        TeacherTask(teacherService);
     }
     else if (role == "Student")
     {
@@ -122,6 +125,26 @@ static void StudentTask(StudentService studentService, int studentId)
     }
 }
 
+static void TeacherTask(TeacherService teacherService)
+{
+    while (true)
+    {
+        Console.WriteLine("Choose an option to continue: ");
+        Console.WriteLine("1. Check Attendance Report");
+        Console.WriteLine("2. Logout");
+
+        string choice = Console.ReadLine();
+        switch (choice)
+        {
+            case "1":
+                teacherService.CheckAttendanceReport();
+                break;
+
+            case "2":
+                return;
+        }
+    }
+}
 
 
 

@@ -58,7 +58,7 @@ namespace AttendanceSystem.Services
 
         public void AssignTeacherInCourse()
         {
-            Console.WriteLine("Teacher's List with their ID: ");
+            Console.WriteLine("Teacher's List with their Id: ");
 
             var teachers = _projectDbContext.Users.Where(u => u.UserRole == "Teacher").ToList();
 
@@ -71,7 +71,7 @@ namespace AttendanceSystem.Services
 
             Console.WriteLine();
 
-            Console.WriteLine("Courses List with their ID: ");
+            Console.WriteLine("Courses List with their Id: ");
 
             var courses = _projectDbContext.Courses.ToList();
 
@@ -97,12 +97,11 @@ namespace AttendanceSystem.Services
             _projectDbContext.TeacherCourses.Add(teacherInCourse);
             _projectDbContext.SaveChanges();
 
-            Console.WriteLine("Teacher has been successfully assigned to the course.");
         }
 
         public void AssignStudentInCourse()
         {
-            Console.WriteLine("Students List with their ID: ");
+            Console.WriteLine("Students List with their Id: ");
 
             var students = _projectDbContext.Users.Where(u => u.UserRole == "Student").ToList();
 
@@ -115,7 +114,7 @@ namespace AttendanceSystem.Services
 
             Console.WriteLine();
 
-            Console.WriteLine("Courses List with their ID: ");
+            Console.WriteLine("Courses List with their Id: ");
 
             var courses = _projectDbContext.Courses.ToList();
 
@@ -141,11 +140,10 @@ namespace AttendanceSystem.Services
             _projectDbContext.StudentCourses.Add(studentInCourse);
             _projectDbContext.SaveChanges();
 
-            Console.WriteLine("Student has been successfully assigned to the course.");
         }
         public void SetClassSchedule()
         {
-            Console.WriteLine("Courses List with their ID: ");
+            Console.WriteLine("Courses List with their Id: ");
 
             var courses = _projectDbContext.Courses.ToList();
 
@@ -156,16 +154,16 @@ namespace AttendanceSystem.Services
                 Console.WriteLine(course.CourseName);
             }
 
-            Console.Write("Enter Course ID: ");
+            Console.Write("Enter Course Id: ");
             int courseId = Convert.ToInt32(Console.ReadLine());
 
             Console.Write("Enter Day: ");
             string day = Console.ReadLine();
 
-            Console.Write("Enter Start Time (hh:mm): ");
+            Console.Write("Enter Start Time (hh:mm in 24-hour format): ");
             DateTime startTime = DateTime.Parse(Console.ReadLine());
 
-            Console.Write("Enter End Time (hh:mm): ");
+            Console.Write("Enter End Time (hh:mm in 24-hour format): ");
             DateTime endTime = DateTime.Parse(Console.ReadLine());
 
             Console.Write("Enter Total Classes: ");
@@ -183,7 +181,6 @@ namespace AttendanceSystem.Services
             _projectDbContext.Schedules.Add(schedule);
             _projectDbContext.SaveChanges();
 
-            Console.WriteLine("Class schedule is set successfully.");
         }
     }
 }

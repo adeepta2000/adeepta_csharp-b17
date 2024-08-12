@@ -29,7 +29,7 @@ namespace AttendanceSystem.Services
                 Console.WriteLine(course.Course.CourseName);
             }
 
-            Console.Write("Enter Course ID: ");
+            Console.Write("Enter Course Id: ");
             int courseId = Convert.ToInt32(Console.ReadLine());
 
             var currentDay = DateTime.Now.DayOfWeek.ToString();
