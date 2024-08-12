@@ -55,5 +55,135 @@ namespace AttendanceSystem.Services
             _projectDbContext.Courses.Add(course);
             _projectDbContext.SaveChanges();
         }
+
+        public void AssignTeacherInCourse()
+        {
+            Console.WriteLine("Teacher's List with their ID: ");
+
+            var teachers = _projectDbContext.Users.Where(u => u.UserRole == "Teacher").ToList();
+
+            foreach (var teacher in teachers)
+            {
+                Console.Write(teacher.Id);
+                Console.Write(" ");
+                Console.WriteLine(teacher.Name);
+            }
+
+            Console.WriteLine();
+
+            Console.WriteLine("Courses List with their ID: ");
+
+            var courses = _projectDbContext.Courses.ToList();
+
+            foreach (var course in courses)
+            {
+                Console.Write(course.Id);
+                Console.Write(" ");
+                Console.WriteLine(course.CourseName);
+            }
+
+            Console.Write("Enter Teacher Id: ");
+            int teacherId = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter Course Id: ");
+            int courseId = Convert.ToInt32(Console.ReadLine());
+
+            var teacherInCourse = new TeacherCourse
+            {
+                TeacherId = teacherId,
+                CourseId = courseId
+            };
+
+            _projectDbContext.TeacherCourses.Add(teacherInCourse);
+            _projectDbContext.SaveChanges();
+
+            Console.WriteLine("Teacher has been successfully assigned to the course.");
+        }
+
+        public void AssignStudentInCourse()
+        {
+            Console.WriteLine("Students List with their ID: ");
+
+            var students = _projectDbContext.Users.Where(u => u.UserRole == "Student").ToList();
+
+            foreach (var student in students)
+            {
+                Console.Write(student.Id);
+                Console.Write(" ");
+                Console.WriteLine(student.Name);
+            }
+
+            Console.WriteLine();
+
+            Console.WriteLine("Courses List with their ID: ");
+
+            var courses = _projectDbContext.Courses.ToList();
+
+            foreach (var course in courses)
+            {
+                Console.Write(course.Id);
+                Console.Write(" ");
+                Console.WriteLine(course.CourseName);
+            }
+
+            Console.Write("Enter Student Id: ");
+            int studentId = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter Course Id: ");
+            int courseId = Convert.ToInt32(Console.ReadLine());
+
+            var studentInCourse = new StudentCourse
+            {
+                StudentId = studentId,
+                CourseId = courseId
+            };
+
+            _projectDbContext.StudentCourses.Add(studentInCourse);
+            _projectDbContext.SaveChanges();
+
+            Console.WriteLine("Student has been successfully assigned to the course.");
+        }
+        public void SetClassSchedule()
+        {
+            Console.WriteLine("Courses List with their ID: ");
+
+            var courses = _projectDbContext.Courses.ToList();
+
+            foreach (var course in courses)
+            {
+                Console.Write(course.Id);
+                Console.Write(" ");
+                Console.WriteLine(course.CourseName);
+            }
+
+            Console.Write("Enter Course ID: ");
+            int courseId = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter Day: ");
+            string day = Console.ReadLine();
+
+            Console.Write("Enter Start Time (hh:mm): ");
+            DateTime startTime = DateTime.Parse(Console.ReadLine());
+
+            Console.Write("Enter End Time (hh:mm): ");
+            DateTime endTime = DateTime.Parse(Console.ReadLine());
+
+            Console.Write("Enter Total Classes: ");
+            int totalClasses = Convert.ToInt32(Console.ReadLine());
+
+            var schedule = new Schedule
+            {
+                Day = day,
+                StartTime = startTime,
+                EndTime = endTime,
+                TotalClasses = totalClasses,
+                CourseId = courseId
+            };
+
+            _projectDbContext.Schedules.Add(schedule);
+            _projectDbContext.SaveChanges();
+
+            Console.WriteLine("Class schedule is set successfully.");
+        }
     }
 }

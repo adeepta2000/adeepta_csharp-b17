@@ -10,7 +10,7 @@ namespace AttendanceSystem
 {
     public class Login
     {
-        public string UserLogin(ProjectDbContext projectDbContext)
+        public User UserLogin(ProjectDbContext projectDbContext)
         {
             string username;
             string password;
@@ -34,7 +34,7 @@ namespace AttendanceSystem
             else
             {
                 Console.WriteLine("Welcome back," + " " + user.Name);
-                return user.UserRole;
+                return user;
             }
         }
     }

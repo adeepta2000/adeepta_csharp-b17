@@ -4,6 +4,7 @@ using AttendanceSystem.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AttendanceSystem.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    partial class ProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240812055838_CreateScheduleTable")]
+    partial class CreateScheduleTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,30 +24,6 @@ namespace AttendanceSystem.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("AttendanceSystem.Model.DBEntity.Attendance", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("ClassDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("StudentCourseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentCourseId");
-
-                    b.ToTable("Attendances");
-                });
 
             modelBuilder.Entity("AttendanceSystem.Model.DBEntity.Course", b =>
                 {
@@ -185,17 +164,6 @@ namespace AttendanceSystem.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AttendanceSystem.Model.DBEntity.Attendance", b =>
-                {
-                    b.HasOne("AttendanceSystem.Model.DBEntity.StudentCourse", "StudentCourse")
-                        .WithMany("Attendances")
-                        .HasForeignKey("StudentCourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("StudentCourse");
-                });
-
             modelBuilder.Entity("AttendanceSystem.Model.DBEntity.Schedule", b =>
                 {
                     b.HasOne("AttendanceSystem.Model.DBEntity.Course", "Course")
@@ -252,11 +220,6 @@ namespace AttendanceSystem.Migrations
                     b.Navigation("StudentCourses");
 
                     b.Navigation("TeacherCourses");
-                });
-
-            modelBuilder.Entity("AttendanceSystem.Model.DBEntity.StudentCourse", b =>
-                {
-                    b.Navigation("Attendances");
                 });
 #pragma warning restore 612, 618
         }

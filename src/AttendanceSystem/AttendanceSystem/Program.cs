@@ -1,5 +1,6 @@
 ﻿using AttendanceSystem;
 using AttendanceSystem.Model;
+using AttendanceSystem.Model.DBEntity;
 using AttendanceSystem.Services;
 
 
@@ -7,10 +8,12 @@ ProjectDbContext projectDbContext = new ProjectDbContext();
 
 Login login = new Login();
 
-string role = login.UserLogin(projectDbContext);
+User loggedInUser = login.UserLogin(projectDbContext);
 
-while(true)
+while (true)
 {
+    string role = loggedInUser.UserRole;
+
     if (role == "Admin")
     {
         AdminService adminService = new AdminService(projectDbContext);
@@ -22,7 +25,8 @@ while(true)
     }
     else if (role == "Student")
     {
-        Console.WriteLine("This is student page.");
+        StudentService studentService = new StudentService(projectDbContext);
+        StudentTask(studentService, loggedInUser.Id);
     }
     else
     {
@@ -30,7 +34,7 @@ while(true)
         break;
     }
 
-    role = login.UserLogin(projectDbContext);
+    loggedInUser = login.UserLogin(projectDbContext);
 
 }
 
@@ -72,20 +76,51 @@ static void AdminTask(AdminService adminService)
                 break;
 
             case "3":
-                Console.Write("Enter Course Name:");
+                Console.Write("Enter Course Name: ");
                 string courseName = Console.ReadLine();
-                Console.Write("Enter Course Fees:");
+                Console.Write("Enter Course Fees: ");
                 decimal courseFees = Convert.ToDecimal(Console.ReadLine());
                 adminService.CreateCourse(courseName, courseFees);
                 break;
 
             case "4":
+                adminService.AssignTeacherInCourse();
+                break;
+
+            case "5":
+                adminService.AssignStudentInCourse();
+                break;
+
+            case "6":
+                adminService.SetClassSchedule();
+                break;
+
+            case "7":
                 return;
         }
     }
 }
 
+static void StudentTask(StudentService studentService, int studentId)
+{
+    while (true)
+    {
+        Console.WriteLine("Choose an option to continue: ");
+        Console.WriteLine("1. Give Attendance");
+        Console.WriteLine("2. Logout");
 
+        string choice = Console.ReadLine();
+        switch (choice)
+        {
+            case "1":
+                studentService.GiveAttendance(studentId);
+                break;
+
+            case "2":
+                return;
+        }
+    }
+}
 
 
 
